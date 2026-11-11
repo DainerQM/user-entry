@@ -5,7 +5,7 @@ typed by a user in a terminal, converts that text to other data types, and
 displays the results with f-strings. The runnable example is
 [`user_input_examples.py`](./user_input_examples.py). The example is written
 as simple statements from top to bottom; it does not define functions or
-classes.
+classes, use conditions, or handle exceptions.
 
 ## Requirements
 
@@ -132,30 +132,16 @@ text and values.
 
 Conversion checks whether text can be represented as a type; it does not check
 whether the answer makes sense for your program. For example, `int("-5")` is a
-valid conversion even if an age should not be negative. Programs should check
-their own rules after conversion.
+valid conversion even if an age should not be negative. This simple example
+does not check whether the entered values meet additional rules.
 
-## 3. Handle invalid input
+## 3. What happens when text is not a number?
 
-If text cannot be converted, Python raises a `ValueError`. Without handling
-that exception, the program stops with an error message. Use `try` and
-`except ValueError` to respond clearly:
-
-```python
-age_text = input("How old are you? ")
-
-try:
-    age = int(age_text)
-except ValueError:
-    print("Please enter a whole number, such as 21.")
-else:
-    print(f"Next year, you will be {age + 1}.")
-```
-
-Python runs the statements in `try` first. If conversion raises
-`ValueError`, it runs the `except` block. If conversion succeeds, it runs the
-`else` block. The example program converts both its numeric responses inside a
-`try` block and exits with a helpful message if either response is invalid.
+If text cannot be converted, Python raises a `ValueError` and stops the
+program. This example does not handle that error: enter a whole number for age
+and a decimal number with a period for height. For example, enter `21` and
+`1.68`. Error handling is intentionally left out to keep the example focused
+on the sequence of input, conversion, and output.
 
 ## 4. Put values into output with f-strings
 
@@ -214,9 +200,8 @@ The example program follows this sequence:
 1. It calls `input()` to ask for a name, age, and height.
 2. It calls `.strip()` to remove accidental whitespace around the name.
 3. It converts the age text with `int()` and the height text with `float()`.
-4. It catches `ValueError` and explains what to enter if conversion fails.
-5. If conversion succeeds, it uses f-strings to display the answers, calculate
-   the age next year, and format the height to two decimal places.
+4. It uses f-strings to display the answers, calculate the age next year, and
+   format the height to two decimal places.
 
 For example, if the answers are `Maya`, `21`, and `1.68`, the final output
 includes:
@@ -235,14 +220,14 @@ Your output will contain the answers you typed.
 | Mistake | Why it happens | What to do |
 |---|---|---|
 | Adding a number directly to input text | `input()` returns `str` | Convert it first with `int()` or `float()` |
-| Entering letters when the program expects a number | The text cannot be converted | Catch `ValueError` and explain the expected input |
+| Entering letters when the program expects a number | The text cannot be converted | Enter a valid number; this example does not handle conversion errors |
 | Using `int()` for a decimal such as `"1.5"` | A decimal string is not an integer literal | Use `float()` for decimal input |
 | Expecting `.strip()` to remove spaces between words | `.strip()` only removes whitespace at the ends | Keep internal spaces or process the text separately |
 | Expecting a formatted number to change the variable | An f-string format controls display only | Store a converted or rounded value separately if needed |
 
 Do not use `eval()` to convert user input. It executes Python code rather than
-performing a safe conversion. Use `int()`, `float()`, and appropriate input
-checks instead.
+performing a safe conversion. Use `int()` and `float()` to convert numeric
+text.
 
 ## Practice
 
@@ -251,14 +236,14 @@ checks instead.
 2. Ask for two whole numbers, convert them with `int()`, and print their sum.
 3. Ask for a price, convert it with `float()`, and display it with two decimal
    places.
-4. Try entering text instead of a number in the example. Read the error
-   message, then enter a valid number.
+4. Run the example using a name, a whole-number age, and a decimal height.
 
 ## Remember
 
 - `input()` displays an optional prompt and waits for a response.
 - The result of `input()` is always a string.
 - Convert numeric text with `int()` or `float()` before doing arithmetic.
-- Invalid conversions can raise `ValueError`; handle it when appropriate.
+- Invalid conversions can raise `ValueError`; this example leaves that error
+  handling out.
 - Use f-strings to combine text and values clearly.
 - A conversion does not automatically validate whether an answer is sensible.
