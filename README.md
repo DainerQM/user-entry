@@ -3,7 +3,9 @@
 This lesson explains, step by step, how a Python program reads information
 typed by a user in a terminal, converts that text to other data types, and
 displays the results with f-strings. The runnable example is
-[`user_input_examples.py`](./user_input_examples.py).
+[`user_input_examples.py`](./user_input_examples.py). The example is written
+as simple statements from top to bottom; it does not define functions or
+classes.
 
 ## Requirements
 
@@ -213,8 +215,8 @@ The example program follows this sequence:
 2. It calls `.strip()` to remove accidental whitespace around the name.
 3. It converts the age text with `int()` and the height text with `float()`.
 4. It catches `ValueError` and explains what to enter if conversion fails.
-5. It uses f-strings to display the answers, calculate the age next year, and
-   format the height to two decimal places.
+5. If conversion succeeds, it uses f-strings to display the answers, calculate
+   the age next year, and format the height to two decimal places.
 
 For example, if the answers are `Maya`, `21`, and `1.68`, the final output
 includes:
